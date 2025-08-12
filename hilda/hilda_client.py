@@ -352,83 +352,38 @@ class HildaClient:
     
     @stop_is_needed
     def peek_byte(self, address, signed=True) -> int:
-        """
-        Peek an 8-bit integer
-        :param address: Address to read the byte from
-        :return: Python int
-        """
         return int.from_bytes(self.peek(address, 1), "little", signed=signed)
     
     @stop_is_needed
     def peek_ubyte(self, address) -> int:
-        """
-        Peek an 8-bit unsigned integer.
-        :param address: Address to read the unsigned byte from
-        :return: Python int
-        """
         return self.peek_byte(address, signed=False)
     
     @stop_is_needed
     def peek_short(self, address, signed=True) -> int:
-        """
-        Peek a 16-bit short
-        :param address: Address to read the short from
-        :return: Python int
-        """
         return int.from_bytes(self.peek(address, 2), "little", signed=signed)
     
     @stop_is_needed
     def peek_ushort(self, address) -> int:
-        """
-        Peek a 16-bit unsigned short.
-        :param address: Address to read the unsigned short from
-        :return: Python int
-        """
         return self.peek_short(address, signed=False)
 
     @stop_is_needed
     def peek_int(self, address, signed=True) -> int:
-        """
-        Peek a 32-bit integer
-        :param address: Address to read the integer from
-        :return: Python int
-        """
         return int.from_bytes(self.peek(address, 4), "little", signed=signed)
     
     @stop_is_needed
     def peek_uint(self, address) -> int:
-        """
-        Peek a 32-bit unsigned integer.
-        :param address: Address to read the unsigned integer from
-        :return: Python int
-        """
         return self.peek_int(address, signed=False)
 
     @stop_is_needed
     def peek_long(self, address, signed=True) -> int:
-        """
-        Peek a 64-bit integer.
-        :param address: Address to read the integer from
-        :return: Python int
-        """
         return int.from_bytes(self.peek(address, 8), "little", signed=signed)
     
     @stop_is_needed
     def peek_ulong(self, address) -> int:
-        """
-        Peek a 64-bit unsigned integer.
-        :param address: Address to read the integer from
-        :return: Python int
-        """
         return self.peek_long(address, signed=False)
     
     @stop_is_needed
     def peek_pointer(self, address) -> Symbol:
-        """
-        Peek a (void *) from memory.
-        :param address: Address to read the integer from
-        :return: Symbol representing the value
-        """
         return self.symbol(self.peek_ulong(address))
 
 
