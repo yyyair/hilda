@@ -278,6 +278,42 @@ class HildaClient:
         return self.poke(address, bytecode)
 
     @stop_is_needed
+    def poke_byte(self, address, value: int, byteorder="little", signed=True) -> None:
+        self.poke(address, int.to_bytes(value, 1, byteorder, signed))
+
+    @stop_is_needed
+    def poke_ubyte(self, address, value: int, byteorder="little") -> None:
+         self.poke_byte(address, value, byteorder, False)
+    
+    @stop_is_needed
+    def poke_short(self, address, value: int, byteorder="little", signed=True) -> None:
+        self.poke(address, int.to_bytes(value, 2, byteorder, signed))
+
+    @stop_is_needed
+    def poke_ushort(self, address, value: int, byteorder="little") -> None:
+        self.poke_short(address, value, byteorder, False)
+
+    @stop_is_needed
+    def poke_int(self, address, value: int, byteorder="little", signed=True) -> None:
+        self.poke(address, int.to_bytes(value, 4, byteorder, signed))
+
+    @stop_is_needed
+    def poke_uint(self, address, value: int, byteorder="little") -> None:
+        self.poke_int(address, value, byteorder, False)
+
+    @stop_is_needed
+    def poke_long(self, address, value: int, byteorder="little", signed=True) -> None:
+        self.poke(address, int.to_bytes(value, 8, byteorder, signed))
+
+    @stop_is_needed
+    def poke_ulong(self, address, value: int, byteorder="little") -> None:
+        self.poke_long(address, value, byteorder, False)
+    
+    @stop_is_needed
+    def poke_pointer(self, address, value: Symbol) -> None:
+        self.poke_ulong(address, int(value))
+
+    @stop_is_needed
     def peek(self, address, size: int) -> bytes:
         """
         Read data at given address
